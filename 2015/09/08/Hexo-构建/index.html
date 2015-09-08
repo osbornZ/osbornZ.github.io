@@ -15,7 +15,7 @@ Node到Node.js官网下载相应平台的最新版本，一路">
 <meta property="og:description" content="首先静态博客, Hexo是基于Node.js的静态Blog搭建工具像jelly（ruby），octopress等一系列好用的静态博客生成程序。而且现在dropbox也支持放置静态页面，也有了像farbox等一类好用的工具。之前搭建配置部署环节的问题，于是写在简书，今天来填坑。
 配置环境首先，必须要有 github 和 node 的环境基础：
 Node到Node.js官网下载相应平台的最新版本，一路">
-<meta property="og:updated_time" content="2015-09-08T15:16:25.000Z">
+<meta property="og:updated_time" content="2015-09-08T15:23:36.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo 构建">
 <meta name="twitter:description" content="首先静态博客, Hexo是基于Node.js的静态Blog搭建工具像jelly（ruby），octopress等一系列好用的静态博客生成程序。而且现在dropbox也支持放置静态页面，也有了像farbox等一类好用的工具。之前搭建配置部署环节的问题，于是写在简书，今天来填坑。
@@ -230,22 +230,14 @@ Node到Node.js官网下载相应平台的最新版本，一路">
 <figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo generate</span><br><span class="line">hexo <span class="keyword">server</span></span><br></pre></td></tr></table></figure>
 <p>主要来说下这期间出现的问题:</p>
 <ol>
-<li><p>hexo server 以后，“ Usage: hexo <command>…”没有生成本地服务,<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="operator"><span class="keyword">install</span> hexo-<span class="keyword">server</span> <span class="comment">--save</span></span></span><br></pre></td></tr></table></figure></p>
-</li>
-<li><p>出现白板和Cannot GET / 几个字:</p>
+<li><p>hexo server 以后，“ Usage: hexo <command>…”没有生成本地服务,<figure class="highlight"><figcaption><span>install hexo-server --save</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">```&#10;2. &#20986;&#29616;&#30333;&#26495;&#21644;Cannot GET / &#20960;&#20010;&#23383;:</span><br></pre></td></tr></table></figure></p>
+<p>npm install hexo-renderer-ejs –save<br>npm install hexo-renderer-stylus –save<br>npm install hexo-renderer-marked –save<br>hexo generate （或hexo g）<br>hexo server （或hexo s）</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">---</span></span><br><span class="line"><span class="comment">## 配置部署</span></span><br><span class="line">Hexo 根目录下的 _config.yml是主配置文件，后面在你的themes下面也会有一个_config.yml文件主要来配置主题的一些东西.</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="operator"><span class="keyword">install</span> hexo-renderer-ejs <span class="comment">--save</span></span><br><span class="line">npm <span class="keyword">install</span> hexo-renderer-stylus <span class="comment">--save</span></span><br><span class="line">npm <span class="keyword">install</span> hexo-renderer-marked <span class="comment">--save</span></span><br><span class="line">hexo generate （或hexo <span class="keyword">g</span>）</span><br><span class="line">hexo <span class="keyword">server</span> （或hexo s）</span></span><br></pre></td></tr></table></figure>
-<hr>
-<h2 id="配置部署">配置部署</h2><p>Hexo 根目录下的 _config.yml是主配置文件，后面在你的themes下面也会有一个_config.yml文件主要来配置主题的一些东西.</p>
-<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="label">title:</span> <span class="preprocessor">#主题名称</span></span><br><span class="line"><span class="label">subtitle:</span> <span class="preprocessor">#副标题 </span></span><br><span class="line"><span class="label">description:</span> <span class="preprocessor">#描述</span></span><br><span class="line"><span class="label">author:</span> <span class="preprocessor">#博主</span></span><br><span class="line"><span class="label">language:</span> <span class="preprocessor">#英语 en  #汉语 zh-Hans</span></span><br><span class="line"> .</span><br><span class="line"> .</span><br><span class="line"> .</span><br><span class="line"><span class="preprocessor"># Deployment</span></span><br><span class="line"><span class="preprocessor">## Docs: http://hexo.io/docs/deployment.html</span></span><br><span class="line"><span class="label">deploy:</span></span><br><span class="line">  type: git</span><br><span class="line">  repo: <span class="preprocessor">#你的GitHub新建的那个仓库链接</span></span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
-<p>最后部署到Git：</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo generate   <span class="id">#hexo</span> g 简写</span><br><span class="line">hexo deployer   <span class="id">#hexo</span> d 简写</span><br></pre></td></tr></table></figure>
-<p>存在的问题：</p>
-<ol>
-<li>书写问题，在每个字段后面需要进行空格的预留，不然会有”can not read a block mapping entry”</li>
-<li>hexo d 之后，ERROR Deployer not found: git <code>npm install hexo-deployer-git --save</code></li>
-</ol>
+<p>title: #主题名称<br>subtitle: #副标题<br>description: #描述<br>author: #博主<br>language: #英语 en  #汉语 zh-Hans<br> .<br> .<br> .</p>
+<h1 id="Deployment">Deployment</h1><h2 id="Docs:_http://hexo-io/docs/deployment-html">Docs: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">http://hexo.io/docs/deployment.html</a></h2><p>deploy:<br>  type: git<br>  repo: #你的GitHub新建的那个仓库链接<br>  branch: master<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">最后部署到Git：</span><br></pre></td></tr></table></figure></p>
+<p>hexo generate   #hexo g 简写<br>hexo deployer   #hexo d 简写<br><figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">存在的问题：</span><br><span class="line"></span><br><span class="line"><span class="number">1</span>. 书写问题，在每个字段后面需要进行空格的预留，不然会有<span class="string">"can not read a block mapping entry"</span></span><br><span class="line"><span class="number">2</span>. hexo d 之后，ERROR Deployer <span class="literal">not</span> found: git <span class="escape">``</span><span class="escape">`n</span>pm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure></p>
 <p>最后便能够在浏览器中输入your_name.github.io查看自己的Hexo博客.</p>
 <h3 id="自由发挥">自由发挥</h3><p>自定义的东西更加酷炫和好玩，可以自定义自己喜欢的主题<a href="https://github.com/hexojs/hexo/wiki/Themes" target="_blank" rel="external">WiKi 主题大全</a>，配置一些显示信息，简单熟悉MarkDown 语法就可以了，还有很多玩法等待大家去发掘。最后贴上<a href="https://hexo.io/" target="_blank" rel="external">Hexo官网</a>。</p>
 
