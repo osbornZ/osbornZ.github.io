@@ -7,20 +7,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="首先静态博客, Hexo是基于Node.js的静态Blog搭建工具像jelly（ruby），octopress等一系列好用的静态博客生成程序。而且现在dropbox也支持放置静态页面，也有了像farbox等一类好用的工具。之前搭建配置部署环节的问题，于是写在简书，今天来填坑。
 配置环境首先，必须要有 github 和 node 的环境基础：
-###Node到Node.js官网下载相应平台的最新版本">
+Node到Node.js官网下载相应平台的最新版本，一路">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hexo 构建">
 <meta property="og:url" content="http://osbornZ.github.com/2015/09/08/Hexo-构建/index.html">
 <meta property="og:site_name" content="zfan’s Blog">
 <meta property="og:description" content="首先静态博客, Hexo是基于Node.js的静态Blog搭建工具像jelly（ruby），octopress等一系列好用的静态博客生成程序。而且现在dropbox也支持放置静态页面，也有了像farbox等一类好用的工具。之前搭建配置部署环节的问题，于是写在简书，今天来填坑。
 配置环境首先，必须要有 github 和 node 的环境基础：
-###Node到Node.js官网下载相应平台的最新版本">
-<meta property="og:updated_time" content="2015-09-08T15:02:48.000Z">
+Node到Node.js官网下载相应平台的最新版本，一路">
+<meta property="og:updated_time" content="2015-09-08T15:06:10.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo 构建">
 <meta name="twitter:description" content="首先静态博客, Hexo是基于Node.js的静态Blog搭建工具像jelly（ruby），octopress等一系列好用的静态博客生成程序。而且现在dropbox也支持放置静态页面，也有了像farbox等一类好用的工具。之前搭建配置部署环节的问题，于是写在简书，今天来填坑。
 配置环境首先，必须要有 github 和 node 的环境基础：
-###Node到Node.js官网下载相应平台的最新版本">
+Node到Node.js官网下载相应平台的最新版本，一路">
   
     <link rel="alternative" href="/atom.xml" title="zfan’s Blog" type="application/atom+xml">
   
@@ -215,17 +215,16 @@
       
         <p>首先静态博客, Hexo是基于Node.js的静态Blog搭建工具像jelly（ruby），octopress等一系列好用的静态博客生成程序。而且现在dropbox也支持放置静态页面，也有了像farbox等一类好用的工具。之前搭建配置部署环节的问题，于是写在<a href="http://www.jianshu.com/users/eba8adbe8ef8/latest_articles" target="_blank" rel="external">简书</a>，今天来填坑。</p>
 <h2 id="配置环境">配置环境</h2><p>首先，必须要有 github 和 node 的环境基础：</p>
-<p>###Node<br>到<a href="http://nodejs.org/" target="_blank" rel="external">Node.js</a>官网下载相应平台的最新版本，一路安装即可。<br>Mac 下面命令即可搞定(可以 node -v 查看本地，有的系统版本默认已经安装<br>)：</p>
+<h3 id="Node">Node</h3><p>到<a href="http://nodejs.org/" target="_blank" rel="external">Node.js</a>官网下载相应平台的最新版本，一路安装即可。<br>Mac 下面命令即可搞定(可以 node -v 查看本地，有的系统版本默认已经安装<br>)：</p>
 <figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="keyword">brew </span>install node</span><br></pre></td></tr></table></figure>
-<p>###Github</p>
-<ul>
+<h3 id="Github">Github</h3><ul>
 <li>可以进行命令行安装(麻烦)，已经安装的可以查看本地配置信息</li>
 <li>最好可以注册一个<a href="https://github.com/" target="_blank" rel="external">GitHub账号</a>，已有的请忽略</li>
 <li>然后建立与你用户名对应的仓库，名称必须为[user_name.github.io]</li>
 <li>添加SSH公钥到[Account settings-&gt;SSH Keys-&gt;Add SSH Key]</li>
 </ul>
 <p>然后在本地查看你的用户名和邮箱，对于在个人和公司账号之间切换的需要特别注意。git 配置信息关系到后面部署成功与否。<br>常见问题参考：<br><a href="https://help.github.com/articles/error-permission-denied-publickey/" target="_blank" rel="external">GitHub Help</a></p>
-<p>##Install<br>Node 和 Git 都配置好的，可以进行命令安装Hexo:</p>
+<h2 id="Install">Install</h2><p>Node 和 Git 都配置好的，可以进行命令安装Hexo:</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="operator"><span class="keyword">install</span> -<span class="keyword">g</span> hexo</span><br><span class="line">hexo init &lt;your_folder&gt;</span><br><span class="line">cd your_folder</span></span><br></pre></td></tr></table></figure>
 <p>至此已经在your_folder下面生成了本地静态页面文件,然后进行本地启动在浏览器输入<a href="http://localhost:4000" target="_blank" rel="external">http://localhost:4000</a>就可以看到效果：</p>
 <figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo generate</span><br><span class="line">hexo <span class="keyword">server</span></span><br></pre></td></tr></table></figure>
@@ -239,7 +238,7 @@
 </ol>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="operator"><span class="keyword">install</span> hexo-renderer-ejs <span class="comment">--save</span></span><br><span class="line">npm <span class="keyword">install</span> hexo-renderer-stylus <span class="comment">--save</span></span><br><span class="line">npm <span class="keyword">install</span> hexo-renderer-marked <span class="comment">--save</span></span><br><span class="line">hexo generate （或hexo <span class="keyword">g</span>）</span><br><span class="line">hexo <span class="keyword">server</span> （或hexo s）</span></span><br></pre></td></tr></table></figure>
 <hr>
-<p>##配置部署<br>Hexo 根目录下的 _config.yml是主配置文件，后面在你的themes下面也会有一个_config.yml文件主要来配置主题的一些东西.</p>
+<h2 id="配置部署">配置部署</h2><p>Hexo 根目录下的 _config.yml是主配置文件，后面在你的themes下面也会有一个_config.yml文件主要来配置主题的一些东西.</p>
 <figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="label">title:</span> <span class="preprocessor">#主题名称</span></span><br><span class="line"><span class="label">subtitle:</span> <span class="preprocessor">#副标题 </span></span><br><span class="line"><span class="label">description:</span> <span class="preprocessor">#描述</span></span><br><span class="line"><span class="label">author:</span> <span class="preprocessor">#博主</span></span><br><span class="line"><span class="label">language:</span> <span class="preprocessor">#英语 en  #汉语 zh-Hans</span></span><br><span class="line"> .</span><br><span class="line"> .</span><br><span class="line"> .</span><br><span class="line"><span class="preprocessor"># Deployment</span></span><br><span class="line"><span class="preprocessor">## Docs: http://hexo.io/docs/deployment.html</span></span><br><span class="line"><span class="label">deploy:</span></span><br><span class="line">  type: git</span><br><span class="line">  repo: <span class="preprocessor">#你的GitHub新建的那个仓库链接</span></span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
 <p>最后部署到Git：</p>
 <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo generate   <span class="id">#hexo</span> g 简写</span><br><span class="line">hexo deployer   <span class="id">#hexo</span> d 简写</span><br></pre></td></tr></table></figure>
@@ -249,7 +248,7 @@
 <li>hexo d 之后，ERROR Deployer not found: git <code>npm install hexo-deployer-git --save</code></li>
 </ol>
 <p>最后便能够在浏览器中输入your_name.github.io查看自己的Hexo博客.</p>
-<p>###拓展<br>自定义的东西更加酷炫和好玩，可以自定义自己喜欢的主题<a href="https://github.com/hexojs/hexo/wiki/Themes" target="_blank" rel="external">WiKi 主题大全</a>，配置一些显示信息，简单熟悉MarkDown 语法就可以了，还有很多玩法等待大家去发掘。最后贴上<a href="https://hexo.io/" target="_blank" rel="external">Hexo官网</a>。</p>
+<h3 id="自由发挥">自由发挥</h3><p>自定义的东西更加酷炫和好玩，可以自定义自己喜欢的主题<a href="https://github.com/hexojs/hexo/wiki/Themes" target="_blank" rel="external">WiKi 主题大全</a>，配置一些显示信息，简单熟悉MarkDown 语法就可以了，还有很多玩法等待大家去发掘。最后贴上<a href="https://hexo.io/" target="_blank" rel="external">Hexo官网</a>。</p>
 
       
     </div>
