@@ -253,6 +253,220 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://osbornZ.github.com/2020/01/02/CoreImage-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="osborn">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="诗与远方">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/01/02/CoreImage-1/" itemprop="url">CoreImage-1</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-01-02T18:33:48+08:00">
+                2020-01-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2020/01/02/CoreImage-1/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2020/01/02/CoreImage-1/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="概论">概论</h3><p>Core Image 是 Apple 用来最大化利用其所运行之上的硬件的。每个滤镜实际上的实现，即内核，是由一个 GLSL (即 OpenGL 的着色语言) 的子集（CIKL）来书写的。当多个滤镜连接成一个滤镜图表，Core Image 便把内核串在一起来构建一个可在 GPU 上运行的高效程序。（可以选择使用 CPU 或者 GPU）</p>
+<h3 id="CIFilter_处理">CIFilter 处理</h3><p>CIImage ~ UIImage  经过CIFilter 处理后的输出是 CIImage，可以挂载 CIContext 进行输出和转换，但是是在 CPU上； 我们可以挂载在 GPU上进行加速处理（ EAGLContext）</p>
+<ul>
+<li>函数式组合滤镜</li>
+<li>自定义 CIFilter  （CIkernel）</li>
+</ul>
+<p><strong>分类</strong></p>
+<ul>
+<li>CIColorKernel：用于处理色值变化的 Filter。</li>
+<li>CIWarpKernel：用于处理形变的 Filter。</li>
+<li>CIKernel：通用。</li>
+</ul>
+<p>查看系统提供支持的滤镜集合：</p>
+<pre><code><span class="built_in">NSArray</span>&lt;<span class="built_in">NSString</span> *&gt; *filterNames = [<span class="built_in">CIFilter</span> filterNamesInCategory:k<span class="built_in">CICategoryBuiltIn</span>];
+</code></pre><h3 id="基础使用">基础使用</h3><pre><code><span class="built_in">CIImage</span> *inputImage = [<span class="built_in">CIImage</span> imageWith<span class="built_in">CGImage</span>:image<span class="variable">.CGImage</span>];
+<span class="built_in">CIFilter</span> *filter = [<span class="built_in">CIFilter</span> filterWithName:<span class="string">@"CIGaussianBlur"</span>];
+[filter setValue:inputImage  forKey:k<span class="built_in">CIInputImageKey</span>];
+[filter setValue:@<span class="number">40</span> forKey:<span class="string">@"inputScale"</span>];
+<span class="built_in">CIImage</span> *outImage = [filter valueForKey:k<span class="built_in">CIOutputImageKey</span>];
+<span class="built_in">CIContext</span> *context = [<span class="built_in">CIContext</span> contextWithOptions:<span class="literal">nil</span>]; <span class="comment">//</span>
+<span class="built_in">CGImageRef</span> cgImage = [context create<span class="built_in">CGImage</span>:outImage fromRect:[inputImage extent]];
+<span class="built_in">UIImage</span> *showImage = [<span class="built_in">UIImage</span> imageWith<span class="built_in">CGImage</span>:cgImage];
+<span class="built_in">CGImageRelease</span>(cgImage);
+</code></pre><h3 id="滤镜链">滤镜链</h3><pre><code><span class="built_in">CIContext</span>有两种初始化方法，分别对应GPU和CPU
+(<span class="number">1</span>)创建基于GPU的<span class="built_in">CIContext</span>对象:
+    context = [<span class="built_in">CIContext</span> contextWithOptions: <span class="literal">nil</span>];
+(<span class="number">2</span>)创建基于CPU的<span class="built_in">CIContext</span>对象
+    context = [<span class="built_in">CIContext</span> contextWithOptions: [<span class="built_in">NSDictionary</span> dictionaryWithObject:    [<span class="built_in">NSNumber</span> numberWithBool:<span class="literal">YES</span>]
+    forKey:k<span class="built_in">CIContextUseSoftwareRenderer</span>]];
+</code></pre><p><strong>CIContext</strong> 是多线程共用的，这样创建 output UIImage 的时候就不需要进行内省的，避免资源浪费。</p>
+<pre><code>imageWith<span class="built_in">CIImage</span> 会内部创建 <span class="built_in">CIContext</span> 进行绘制。
+</code></pre><p>指定使用 GPU 可以使用openGL 和 Metal 进行渲染。</p>
+<pre><code>CPU is still what will give you <span class="operator">the</span> best fidelity where <span class="keyword">as</span> <span class="operator">the</span> GPU will give you <span class="operator">the</span> best performance.
+</code></pre><p>利用实时渲染的特效，而不是每次操作都产生一个 UIImage，然后再设置到视图上。  </p>
+<pre><code><span class="comment">// 实时渲染</span>
+[self.pixellateFilter <span class="string">setValue:</span>@(sender.value) <span class="string">forKey:</span>@<span class="string">"inputRadius"</span>];
+
+[self.context <span class="string">drawImage:</span>_pixellateFilter.outputImage <span class="string">inRect:</span>_targetBounds  <span class="string">fromRect:</span>_inputImage.extent];
+[self.glkView.context <span class="string">presentRenderbuffer:</span>GL_RENDERBUFFER];
+</code></pre><p>创建 context，那么它内部的渲染器会根据设备最优选择：依次为 Metal、OpenGLES、CoreGraphics。  ps: 模拟器不支持 Metal。</p>
+<h3 id="CoreImage_&amp;&amp;_GPUImage">CoreImage  &amp;&amp; GPUImage</h3><ol>
+<li>支持对原生 RAW 格式图片的处理。支持对大图进行处理。</li>
+<li>自动增强图像效果，会分析图像的直方图，图像属性，脸部区域，然后通过一组滤镜来改善图像效果。</li>
+<li>支持图像识别功能，人脸识别，条形码，文本等。</li>
+<li>与 Metal SpriteKit，SceneKit，Core Animation 结合。</li>
+</ol>
+<h4 id="CoreImage_and_Metal">CoreImage and Metal</h4><p> CIKL 自定义效果实现<br> (埋坑) </p>
+<h4 id="CoreImage_and_Vision">CoreImage and Vision</h4><p> Vision Framework 是计算机视觉的高级框架。<br> <a href="https://developer.apple.com/videos/play/wwdc2017/506" target="_blank" rel="external">Vision WWDC 2017</a></p>
+<p> <strong>搭配组合进行效果处理的方式</strong></p>
+<ol>
+<li>预处理前处理  （裁剪，旋转，灰度等）</li>
+<li>识别后进行分发处理   （识别到人脸后做逻辑处理 CI…）</li>
+</ol>
+<p> <strong>对于校准和稳定性的处理</strong></p>
+<ul>
+<li>face detection</li>
+<li>矩形、barcode 、text detection</li>
+</ul>
+<h4 id="参考">参考</h4><p> <a href="https://objccn.io/issue-21-6/" target="_blank" rel="external">Core Image介绍</a></p>
+<p> <a href="https://github.com/FlexMonkey/Filterpedia" target="_blank" rel="external">自定义滤镜参考</a></p>
+<p> <a href="https://developer.apple.com/library/archive/documentation/GraphicsImaging/Reference/CoreImageFilterReference/index.html" target="_blank" rel="external">Core Image Filter Reference</a></p>
+<p> <a href="https://developer.apple.com/search/?q=Core%20Image&amp;type=Videos" target="_blank" rel="external">Core Image Video</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://osbornZ.github.com/2019/12/24/Image-Editing-with-Depth/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1037,7 +1251,7 @@ AVDepthData
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1059,7 +1273,7 @@ AVDepthData
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
