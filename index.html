@@ -253,6 +253,195 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://osbornZ.github.com/2020/06/21/SwiftUI-初识/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="osborn">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="诗与远方">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/06/21/SwiftUI-初识/" itemprop="url">SwiftUI 初识</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-21T21:26:56+08:00">
+                2020-06-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Swift/" itemprop="url" rel="index">
+                    <span itemprop="name">Swift</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2020/06/21/SwiftUI-初识/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2020/06/21/SwiftUI-初识/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><img src="https://myblogattach.oss-cn-beijing.aliyuncs.com/swiftui-96x96_2x.png?x-oss-process=style/compress&amp;Expires=1592746840&amp;OSSAccessKeyId=TMP.3KdBM7JuAScnhdtTdvdpVXzvbCt9iSo3Yr2NcopjjPYwqdms6MLQBESs9KoqVvLei9vE3mrjSCZRnp8M64Y9KBhV3zwrz2&amp;Signature=zfiSbE3iC0enfcwQVoBwF6%2Fw4To%3D" alt="swiftUI"></p>
+<p>大前端风向目前一直很强劲，目前Google 的 <strong>Flutter</strong> 可谓是风头正盛。而 苹果呢，也在去年展示了自家的跨自家平台框架 <strong>SwiftUI</strong>.</p>
+<p>开始一波新的征程, 脱离 《UIKit》 的这套框架，重新定义了新的方式和类型、</p>
+<h3 id="语言&amp;语法">语言&amp;语法</h3><p>swift 和 Dart 都作为两个平台的新生代语言。 swift 也打破了苹果的封闭原则，采用开源的方式使其得到了快速的发展。</p>
+<p>SwiftUI 用数据绑定和状态管理替代了原有的复杂控制逻辑，而 DSL 又使得代码在结构上和 UI 的层级结构高度一致。</p>
+<p>一直以来我们都 <strong>面向对象编程</strong> <em>OOP</em> 的封装、集成。它是一种控制流，命令式的方式。<br>swift 以 <strong>函数式编程</strong> <em>functional programming</em> 更像是一种 声明式语法 和 <strong>面向协议编程</strong> <em>POP</em> .</p>
+<p>这语法糖真的是太甜了： 不需要 <strong>；</strong> 、 缺省参数、 内联闭包 、 最后一个参数是{}, 则可以放到整个属性外面， 如果没有参数()，则可以省略()</p>
+<pre><code>struct <span class="type">ContentView</span>: <span class="type">View</span> {
+
+        @<span class="type">State</span> <span class="keyword">var</span> name:<span class="type">String</span> = <span class="string">"osborn"</span> 
+     <span class="keyword">let</span> results = [<span class="type">Result</span>(score: <span class="number">8</span>), <span class="type">Result</span>(score: <span class="number">5</span>), <span class="type">Result</span>(score: <span class="number">10</span>)]
+
+     <span class="keyword">var</span> body: some <span class="type">View</span> {
+
+     <span class="type">HStack</span> {
+        <span class="type">ForEach</span>( results ) { (<span class="literal">result</span>) <span class="keyword">in</span>
+            <span class="type">Text</span>(<span class="string">"Result: \(result.score)"</span>)
+        }
+     }
+
+    .padding()
+    .foregroundColor(<span class="type">Color</span>.orange)
+    .font(<span class="type">Font</span>.largeTitle)
+}
+</code></pre><p>}    </p>
+<p><strong>View</strong></p>
+<p><img src="https://myblogattach.oss-cn-beijing.aliyuncs.com/WeChat20a0f3b2e7221b70f945f72cd85904ca.png?x-oss-process=style/compress&amp;Expires=1592746930&amp;OSSAccessKeyId=TMP.3KdBM7JuAScnhdtTdvdpVXzvbCt9iSo3Yr2NcopjjPYwqdms6MLQBESs9KoqVvLei9vE3mrjSCZRnp8M64Y9KBhV3zwrz2&amp;Signature=4N9Vx%2F%2BZZUqBmNpZqOohej5jCI8%3D" alt="UIControl"></p>
+<p><strong>类型</strong></p>
+<ul>
+<li>struct </li>
+<li>class</li>
+<li>Protocol</li>
+<li>generics</li>
+<li>enum</li>
+<li>functions</li>
+</ul>
+<h3 id="参考">参考</h3><p><a href="https://onevcat.com/2016/11/pop-cocoa-1/" target="_blank" rel="external">喵神 – 面向协议编程与 Cocoa 的邂逅</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://osbornZ.github.com/2020/06/10/《聚裂》/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1007,181 +1196,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://osbornZ.github.com/2020/02/24/2020/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="osborn">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="诗与远方">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/02/24/2020/" itemprop="url">2020</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-02-24T21:20:15+08:00">
-                2020-02-24
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/随笔/" itemprop="url" rel="index">
-                    <span itemprop="name">随笔</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2020/02/24/2020/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2020/02/24/2020/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>2020 的开局确实有点魔幻，一场人类的疫情席卷而来。令人惶恐不安。</p>
-<p>大家都只能宅在家里，有的人甚至闲出了病。</p>
-<p>一直期望着我们能够啥也不做，吃了睡 睡了吃，但是发现那是多么的不容易。</p>
-<p><em>思考：所以到底问题出在哪里 ？</em></p>
-<pre><code>形而上学： 我们的人生意义究竟是什么 ？ 
-</code></pre><p>我们这么长时间闲下来才会去思考这终极问题。每个人都是在各个阶段攻城拔寨，为了什么 ？ 或许是 忙起来才会让我们摆脱这种无意义的焦虑。</p>
-<p>不做这件事，不做这样的工作，不做这个功能 会怎么样呢？ </p>
-<p>似乎所有的都是 有预期和目的，我们都是结果导向 价值追求。</p>
-<p>我们的内心一直是为什么呢。。。</p>
-<p>有人说，是为了 <strong>理想</strong> 、 有的人说，为了 <strong>家庭</strong> 、有的人为了 <strong>孩子</strong>  </p>
-<p>这个问题没有唯一正确的答案，每个人都是有自己的回答 想必都有了自己内心的目标。</p>
-<pre><code>心之所向 素履以往 生如逆旅 一苇以航。     
-</code></pre><p><strong>魔幻开局</strong></p>
-<ul>
-<li>愿我们疯狂打野, 持续输出</li>
-<li>愿每个人都能抬头看见月亮</li>
-</ul>
-<p><strong>加油吧 2020， 为了心中的 “她” ！！！</strong>   </p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1231,7 +1250,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1242,7 +1261,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -1253,7 +1272,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

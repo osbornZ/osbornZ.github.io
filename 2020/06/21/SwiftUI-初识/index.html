@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="WWDC,iOS," />
+  <meta name="keywords" content="SwiftUI," />
 
 
 
@@ -81,19 +81,27 @@
 
 
 
-<meta name="description" content="概论Core Image 是 Apple 用来最大化利用其所运行之上的硬件的。每个滤镜实际上的实现，即内核，是由一个 GLSL (即 OpenGL 的着色语言) 的子集（CIKL）来书写的。当多个滤镜连接成一个滤镜图表，Core Image 便把内核串在一起来构建一个可在 GPU 上运行的高效程序。（可以选择使用 CPU 或者 GPU）
-CIFilter 处理CIImage ~ UIImage">
+<meta name="description" content="大前端风向目前一直很强劲，目前Google 的 Flutter 可谓是风头正盛。而 苹果呢，也在去年展示了自家的跨自家平台框架 SwiftUI.
+开始一波新的征程, 脱离 《UIKit》 的这套框架，重新定义了新的方式和类型、
+语言&amp;amp;语法swift 和 Dart 都作为两个平台的新生代语言。 swift 也打破了苹果的封闭原则，采用开源的方式使其得到了快速的发展。
+SwiftUI 用数据绑">
 <meta property="og:type" content="article">
-<meta property="og:title" content="CoreImage-1">
-<meta property="og:url" content="http://osbornZ.github.com/2020/01/02/CoreImage-1/index.html">
+<meta property="og:title" content="SwiftUI 初识">
+<meta property="og:url" content="http://osbornZ.github.com/2020/06/21/SwiftUI-初识/index.html">
 <meta property="og:site_name" content="诗与远方">
-<meta property="og:description" content="概论Core Image 是 Apple 用来最大化利用其所运行之上的硬件的。每个滤镜实际上的实现，即内核，是由一个 GLSL (即 OpenGL 的着色语言) 的子集（CIKL）来书写的。当多个滤镜连接成一个滤镜图表，Core Image 便把内核串在一起来构建一个可在 GPU 上运行的高效程序。（可以选择使用 CPU 或者 GPU）
-CIFilter 处理CIImage ~ UIImage">
-<meta property="og:updated_time" content="2020-01-02T10:51:38.107Z">
+<meta property="og:description" content="大前端风向目前一直很强劲，目前Google 的 Flutter 可谓是风头正盛。而 苹果呢，也在去年展示了自家的跨自家平台框架 SwiftUI.
+开始一波新的征程, 脱离 《UIKit》 的这套框架，重新定义了新的方式和类型、
+语言&amp;amp;语法swift 和 Dart 都作为两个平台的新生代语言。 swift 也打破了苹果的封闭原则，采用开源的方式使其得到了快速的发展。
+SwiftUI 用数据绑">
+<meta property="og:image" content="https://myblogattach.oss-cn-beijing.aliyuncs.com/swiftui-96x96_2x.png?x-oss-process=style/compress&Expires=1592746840&OSSAccessKeyId=TMP.3KdBM7JuAScnhdtTdvdpVXzvbCt9iSo3Yr2NcopjjPYwqdms6MLQBESs9KoqVvLei9vE3mrjSCZRnp8M64Y9KBhV3zwrz2&Signature=zfiSbE3iC0enfcwQVoBwF6%2Fw4To%3D">
+<meta property="og:image" content="https://myblogattach.oss-cn-beijing.aliyuncs.com/WeChat20a0f3b2e7221b70f945f72cd85904ca.png?x-oss-process=style/compress&Expires=1592746930&OSSAccessKeyId=TMP.3KdBM7JuAScnhdtTdvdpVXzvbCt9iSo3Yr2NcopjjPYwqdms6MLQBESs9KoqVvLei9vE3mrjSCZRnp8M64Y9KBhV3zwrz2&Signature=4N9Vx%2F%2BZZUqBmNpZqOohej5jCI8%3D">
+<meta property="og:updated_time" content="2020-06-21T13:42:12.329Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CoreImage-1">
-<meta name="twitter:description" content="概论Core Image 是 Apple 用来最大化利用其所运行之上的硬件的。每个滤镜实际上的实现，即内核，是由一个 GLSL (即 OpenGL 的着色语言) 的子集（CIKL）来书写的。当多个滤镜连接成一个滤镜图表，Core Image 便把内核串在一起来构建一个可在 GPU 上运行的高效程序。（可以选择使用 CPU 或者 GPU）
-CIFilter 处理CIImage ~ UIImage">
+<meta name="twitter:title" content="SwiftUI 初识">
+<meta name="twitter:description" content="大前端风向目前一直很强劲，目前Google 的 Flutter 可谓是风头正盛。而 苹果呢，也在去年展示了自家的跨自家平台框架 SwiftUI.
+开始一波新的征程, 脱离 《UIKit》 的这套框架，重新定义了新的方式和类型、
+语言&amp;amp;语法swift 和 Dart 都作为两个平台的新生代语言。 swift 也打破了苹果的封闭原则，采用开源的方式使其得到了快速的发展。
+SwiftUI 用数据绑">
 
 
 
@@ -123,13 +131,13 @@ CIFilter 处理CIImage ~ UIImage">
 
 
 
-  <link rel="canonical" href="http://osbornZ.github.com/2020/01/02/CoreImage-1/"/>
+  <link rel="canonical" href="http://osbornZ.github.com/2020/06/21/SwiftUI-初识/"/>
 
 
 
 
 
-  <title>CoreImage-1 | 诗与远方</title>
+  <title>SwiftUI 初识 | 诗与远方</title>
   
 
 
@@ -256,7 +264,7 @@ CIFilter 处理CIImage ~ UIImage">
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://osbornZ.github.com/2020/01/02/CoreImage-1/">
+    <link itemprop="mainEntityOfPage" href="http://osbornZ.github.com/2020/06/21/SwiftUI-初识/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="osborn">
@@ -273,7 +281,7 @@ CIFilter 处理CIImage ~ UIImage">
 
         
         
-          <h1 class="post-title" itemprop="name headline">CoreImage-1</h1>
+          <h1 class="post-title" itemprop="name headline">SwiftUI 初识</h1>
         
 
         <div class="post-meta">
@@ -285,8 +293,8 @@ CIFilter 处理CIImage ~ UIImage">
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-01-02T18:33:48+08:00">
-                2020-01-02
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-21T21:26:56+08:00">
+                2020-06-21
               </time>
             
 
@@ -308,8 +316,8 @@ CIFilter 处理CIImage ~ UIImage">
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/iOS/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS</span>
+                  <a href="/categories/Swift/" itemprop="url" rel="index">
+                    <span itemprop="name">Swift</span>
                   </a>
                 </span>
 
@@ -326,9 +334,9 @@ CIFilter 处理CIImage ~ UIImage">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2020/01/02/CoreImage-1/#comments" itemprop="discussionUrl">
+                <a href="/2020/06/21/SwiftUI-初识/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2020/01/02/CoreImage-1/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2020/06/21/SwiftUI-初识/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -356,68 +364,43 @@ CIFilter 处理CIImage ~ UIImage">
       
 
       
-        <h3 id="概论">概论</h3><p>Core Image 是 Apple 用来最大化利用其所运行之上的硬件的。每个滤镜实际上的实现，即内核，是由一个 GLSL (即 OpenGL 的着色语言) 的子集（CIKL）来书写的。当多个滤镜连接成一个滤镜图表，Core Image 便把内核串在一起来构建一个可在 GPU 上运行的高效程序。（可以选择使用 CPU 或者 GPU）</p>
-<h3 id="CIFilter_处理">CIFilter 处理</h3><p>CIImage ~ UIImage  经过CIFilter 处理后的输出是 CIImage，可以挂载 CIContext 进行输出和转换，但是是在 CPU上； 我们可以挂载在 GPU上进行加速处理（ EAGLContext）</p>
-<ul>
-<li>函数式组合滤镜</li>
-<li>自定义 CIFilter  （CIkernel）</li>
-</ul>
-<p><strong>分类</strong></p>
-<ul>
-<li>CIColorKernel：用于处理色值变化的 Filter。</li>
-<li>CIWarpKernel：用于处理形变的 Filter。</li>
-<li>CIKernel：通用。</li>
-</ul>
-<p>查看系统提供支持的滤镜集合：</p>
-<pre><code><span class="built_in">NSArray</span>&lt;<span class="built_in">NSString</span> *&gt; *filterNames = [<span class="built_in">CIFilter</span> filterNamesInCategory:k<span class="built_in">CICategoryBuiltIn</span>];
-</code></pre><h3 id="基础使用">基础使用</h3><pre><code><span class="built_in">CIImage</span> *inputImage = [<span class="built_in">CIImage</span> imageWith<span class="built_in">CGImage</span>:image<span class="variable">.CGImage</span>];
-<span class="built_in">CIFilter</span> *filter = [<span class="built_in">CIFilter</span> filterWithName:<span class="string">@"CIGaussianBlur"</span>];
-[filter setValue:inputImage  forKey:k<span class="built_in">CIInputImageKey</span>];
-[filter setValue:@<span class="number">40</span> forKey:<span class="string">@"inputScale"</span>];
-<span class="built_in">CIImage</span> *outImage = [filter valueForKey:k<span class="built_in">CIOutputImageKey</span>];
-<span class="built_in">CIContext</span> *context = [<span class="built_in">CIContext</span> contextWithOptions:<span class="literal">nil</span>]; <span class="comment">//</span>
-<span class="built_in">CGImageRef</span> cgImage = [context create<span class="built_in">CGImage</span>:outImage fromRect:[inputImage extent]];
-<span class="built_in">UIImage</span> *showImage = [<span class="built_in">UIImage</span> imageWith<span class="built_in">CGImage</span>:cgImage];
-<span class="built_in">CGImageRelease</span>(cgImage);
-</code></pre><h3 id="滤镜链">滤镜链</h3><pre><code><span class="built_in">CIContext</span>有两种初始化方法，分别对应GPU和CPU
-(<span class="number">1</span>)创建基于GPU的<span class="built_in">CIContext</span>对象:
-    context = [<span class="built_in">CIContext</span> contextWithOptions: <span class="literal">nil</span>];
-(<span class="number">2</span>)创建基于CPU的<span class="built_in">CIContext</span>对象
-    context = [<span class="built_in">CIContext</span> contextWithOptions: [<span class="built_in">NSDictionary</span> dictionaryWithObject:    [<span class="built_in">NSNumber</span> numberWithBool:<span class="literal">YES</span>]
-    forKey:k<span class="built_in">CIContextUseSoftwareRenderer</span>]];
-</code></pre><p><strong>CIContext</strong> 是多线程共用的，这样创建 output UIImage 的时候就不需要进行内省的，避免资源浪费。</p>
-<pre><code>imageWith<span class="built_in">CIImage</span> 会内部创建 <span class="built_in">CIContext</span> 进行绘制。
-</code></pre><p>指定使用 GPU 可以使用openGL 和 Metal 进行渲染。</p>
-<pre><code>CPU is still what will give you <span class="operator">the</span> best fidelity where <span class="keyword">as</span> <span class="operator">the</span> GPU will give you <span class="operator">the</span> best performance.
-</code></pre><p>利用实时渲染的特效，而不是每次操作都产生一个 UIImage，然后再设置到视图上。  </p>
-<pre><code><span class="comment">// 实时渲染</span>
-[self.pixellateFilter <span class="string">setValue:</span>@(sender.value) <span class="string">forKey:</span>@<span class="string">"inputRadius"</span>];
+        <p><img src="https://myblogattach.oss-cn-beijing.aliyuncs.com/swiftui-96x96_2x.png?x-oss-process=style/compress&amp;Expires=1592746840&amp;OSSAccessKeyId=TMP.3KdBM7JuAScnhdtTdvdpVXzvbCt9iSo3Yr2NcopjjPYwqdms6MLQBESs9KoqVvLei9vE3mrjSCZRnp8M64Y9KBhV3zwrz2&amp;Signature=zfiSbE3iC0enfcwQVoBwF6%2Fw4To%3D" alt="swiftUI"></p>
+<p>大前端风向目前一直很强劲，目前Google 的 <strong>Flutter</strong> 可谓是风头正盛。而 苹果呢，也在去年展示了自家的跨自家平台框架 <strong>SwiftUI</strong>.</p>
+<p>开始一波新的征程, 脱离 《UIKit》 的这套框架，重新定义了新的方式和类型、</p>
+<h3 id="语言&amp;语法">语言&amp;语法</h3><p>swift 和 Dart 都作为两个平台的新生代语言。 swift 也打破了苹果的封闭原则，采用开源的方式使其得到了快速的发展。</p>
+<p>SwiftUI 用数据绑定和状态管理替代了原有的复杂控制逻辑，而 DSL 又使得代码在结构上和 UI 的层级结构高度一致。</p>
+<p>一直以来我们都 <strong>面向对象编程</strong> <em>OOP</em> 的封装、集成。它是一种控制流，命令式的方式。<br>swift 以 <strong>函数式编程</strong> <em>functional programming</em> 更像是一种 声明式语法 和 <strong>面向协议编程</strong> <em>POP</em> .</p>
+<p>这语法糖真的是太甜了： 不需要 <strong>；</strong> 、 缺省参数、 内联闭包 、 最后一个参数是{}, 则可以放到整个属性外面， 如果没有参数()，则可以省略()</p>
+<pre><code>struct <span class="type">ContentView</span>: <span class="type">View</span> {
 
-[self.context <span class="string">drawImage:</span>_pixellateFilter.outputImage <span class="string">inRect:</span>_targetBounds  <span class="string">fromRect:</span>_inputImage.extent];
-[self.glkView.context <span class="string">presentRenderbuffer:</span>GL_RENDERBUFFER];
-</code></pre><p>创建 context，那么它内部的渲染器会根据设备最优选择：依次为 Metal、OpenGLES、CoreGraphics。  ps: 模拟器不支持 Metal。</p>
-<h3 id="CoreImage_&amp;&amp;_GPUImage">CoreImage  &amp;&amp; GPUImage</h3><ol>
-<li>支持对原生 RAW 格式图片的处理。支持对大图进行处理。</li>
-<li>自动增强图像效果，会分析图像的直方图，图像属性，脸部区域，然后通过一组滤镜来改善图像效果。</li>
-<li>支持图像识别功能，人脸识别，条形码，文本等。</li>
-<li>与 Metal SpriteKit，SceneKit，Core Animation 结合。</li>
-</ol>
-<h4 id="CoreImage_and_Metal">CoreImage and Metal</h4><p> CIKL 自定义效果实现<br> (埋坑) </p>
-<h4 id="CoreImage_and_Vision">CoreImage and Vision</h4><p> Vision Framework 是计算机视觉的高级框架。<br> <a href="https://developer.apple.com/videos/play/wwdc2017/506" target="_blank" rel="external">Vision WWDC 2017</a></p>
-<p> <strong>搭配组合进行效果处理的方式</strong></p>
-<ol>
-<li>预处理前处理  （裁剪，旋转，灰度等）</li>
-<li>识别后进行分发处理   （识别到人脸后做逻辑处理 CI…）</li>
-</ol>
-<p> <strong>对于校准和稳定性的处理</strong></p>
+        @<span class="type">State</span> <span class="keyword">var</span> name:<span class="type">String</span> = <span class="string">"osborn"</span> 
+     <span class="keyword">let</span> results = [<span class="type">Result</span>(score: <span class="number">8</span>), <span class="type">Result</span>(score: <span class="number">5</span>), <span class="type">Result</span>(score: <span class="number">10</span>)]
+
+     <span class="keyword">var</span> body: some <span class="type">View</span> {
+
+     <span class="type">HStack</span> {
+        <span class="type">ForEach</span>( results ) { (<span class="literal">result</span>) <span class="keyword">in</span>
+            <span class="type">Text</span>(<span class="string">"Result: \(result.score)"</span>)
+        }
+     }
+
+    .padding()
+    .foregroundColor(<span class="type">Color</span>.orange)
+    .font(<span class="type">Font</span>.largeTitle)
+}
+</code></pre><p>}    </p>
+<p><strong>View</strong></p>
+<p><img src="https://myblogattach.oss-cn-beijing.aliyuncs.com/WeChat20a0f3b2e7221b70f945f72cd85904ca.png?x-oss-process=style/compress&amp;Expires=1592746930&amp;OSSAccessKeyId=TMP.3KdBM7JuAScnhdtTdvdpVXzvbCt9iSo3Yr2NcopjjPYwqdms6MLQBESs9KoqVvLei9vE3mrjSCZRnp8M64Y9KBhV3zwrz2&amp;Signature=4N9Vx%2F%2BZZUqBmNpZqOohej5jCI8%3D" alt="UIControl"></p>
+<p><strong>类型</strong></p>
 <ul>
-<li>face detection</li>
-<li>矩形、barcode 、text detection</li>
+<li>struct </li>
+<li>class</li>
+<li>Protocol</li>
+<li>generics</li>
+<li>enum</li>
+<li>functions</li>
 </ul>
-<h4 id="参考">参考</h4><p> <a href="https://objccn.io/issue-21-6/" target="_blank" rel="external">Core Image介绍</a></p>
-<p> <a href="https://github.com/FlexMonkey/Filterpedia" target="_blank" rel="external">自定义滤镜参考</a></p>
-<p> <a href="https://developer.apple.com/library/archive/documentation/GraphicsImaging/Reference/CoreImageFilterReference/index.html" target="_blank" rel="external">Core Image Filter Reference</a></p>
-<p> <a href="https://developer.apple.com/search/?q=Core%20Image&amp;type=Videos" target="_blank" rel="external">Core Image Video</a></p>
+<h3 id="参考">参考</h3><p><a href="https://onevcat.com/2016/11/pop-cocoa-1/" target="_blank" rel="external">喵神 – 面向协议编程与 Cocoa 的邂逅</a></p>
 
       
     </div>
@@ -435,9 +418,7 @@ CIFilter 处理CIImage ~ UIImage">
       
         <div class="post-tags">
           
-            <a href="/tags/WWDC/" rel="tag"><i class="fa fa-tag"></i> WWDC</a>
-          
-            <a href="/tags/iOS/" rel="tag"><i class="fa fa-tag"></i> iOS</a>
+            <a href="/tags/SwiftUI/" rel="tag"><i class="fa fa-tag"></i> SwiftUI</a>
           
         </div>
       
@@ -450,8 +431,8 @@ CIFilter 处理CIImage ~ UIImage">
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/12/24/Image-Editing-with-Depth/" rel="next" title="Image Editing with Depth">
-                <i class="fa fa-chevron-left"></i> Image Editing with Depth
+              <a href="/2020/06/10/《聚裂》/" rel="next" title="聚裂">
+                <i class="fa fa-chevron-left"></i> 聚裂
               </a>
             
           </div>
@@ -459,10 +440,6 @@ CIFilter 处理CIImage ~ UIImage">
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2020/02/24/2020/" rel="prev" title="2020">
-                2020 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -631,7 +608,7 @@ CIFilter 处理CIImage ~ UIImage">
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#概论"><span class="nav-number">1.</span> <span class="nav-text">概论</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CIFilter_处理"><span class="nav-number">2.</span> <span class="nav-text">CIFilter 处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基础使用"><span class="nav-number">3.</span> <span class="nav-text">基础使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#滤镜链"><span class="nav-number">4.</span> <span class="nav-text">滤镜链</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CoreImage_&&_GPUImage"><span class="nav-number">5.</span> <span class="nav-text">CoreImage  && GPUImage</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#CoreImage_and_Metal"><span class="nav-number">5.1.</span> <span class="nav-text">CoreImage and Metal</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CoreImage_and_Vision"><span class="nav-number">5.2.</span> <span class="nav-text">CoreImage and Vision</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#参考"><span class="nav-number">5.3.</span> <span class="nav-text">参考</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#语言&语法"><span class="nav-number">1.</span> <span class="nav-text">语言&语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考"><span class="nav-number">2.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
@@ -814,9 +791,9 @@ CIFilter 处理CIImage ~ UIImage">
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://osbornZ.github.com/2020/01/02/CoreImage-1/';
-          this.page.identifier = '2020/01/02/CoreImage-1/';
-          this.page.title = 'CoreImage-1';
+          this.page.url = 'http://osbornZ.github.com/2020/06/21/SwiftUI-初识/';
+          this.page.identifier = '2020/06/21/SwiftUI-初识/';
+          this.page.title = 'SwiftUI 初识';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://osbornz.disqus.com/embed.js';
