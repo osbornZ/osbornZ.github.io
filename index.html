@@ -253,6 +253,278 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://osbornZ.github.com/2020/06/26/Swift-基础/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="osborn">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="诗与远方">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/06/26/Swift-基础/" itemprop="url">Swift 基础</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-26T10:51:55+08:00">
+                2020-06-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Swift/" itemprop="url" rel="index">
+                    <span itemprop="name">Swift</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2020/06/26/Swift-基础/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2020/06/26/Swift-基础/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="基础类型安全">基础类型安全</h4><p>Int、double 、Float 、Bool、 Array 、Set 、Dictionary</p>
+<pre><code>！、 ？ 、guard
+</code></pre><p><strong>类型注解（ ype annotation ）</strong></p>
+<pre><code>    var  str : String   <span class="comment">// 可根据声明赋值判断，也可以根据类型注解</span>
+
+一个十进制数，没有前缀
+一个二进制数，前缀是 <span class="number">0</span>b
+一个八进制数，前缀是 <span class="number">0</span>o
+一个十六进制数，前缀是 <span class="number">0</span>x
+
+Int8  -<span class="number">128</span> ~ <span class="number">127</span> ；  UInt8   <span class="number">0</span>~<span class="number">255</span> 
+</code></pre><p><strong>类型别名 ( typealias )</strong></p>
+<pre><code> typealias myColor = UIColor
+<span class="tag">var</span> <span class="attribute">color</span> = myColor.red
+</code></pre><p><strong>元组（Tuple）  返回多个值</strong><br>元组是把多个值组合成一个复合值。元组内的值可以是任意类型，并不要求是相同类型。</p>
+<pre><code>网络请求函数返回值 (<span class="built_in">Int</span>, <span class="built_in">String</span>) 元组来描述是否获取成功.
+</code></pre><p>最适合函数返回值、值传递多个参数的情况，复杂的结构可以使用 <strong>Struct 、Class</strong></p>
+<p><strong>可选类型（ Optional ）</strong><br> 泛指所有对象(类)    &gt;=oc 的 NSNotFound</p>
+<pre><code> <span class="comment">//convertedNumber 被推测为类型 "Int?"， 或者类型 "optional Int"</span>
+ <span class="keyword">let</span> possibleNumber  = <span class="string">"123"</span>
+<span class="keyword">let</span> convertedNumber = Int(possibleNumber) 
+
+
+<span class="keyword">var</span> parameter: <span class="built_in">String</span>?   <span class="comment">//默认值为 nil</span>
+</code></pre><p>Swift 的 nil 和 Objective-C 中的 nil 并不一样。在 Objective-C 中，nil 是一个指向不存在对象的指针。在 Swift 中，nil 不是指针——它是一个确定的值，用来表示值缺失。任何类型的可选状态都可以被设置为 nil，不只是对象类型。</p>
+<p><strong>异常处理</strong></p>
+<pre><code>do {
+    try shouldDoSomething()
+} catch {
+     <span class="comment">&lt;!----&gt;</span>
+} 
+</code></pre><p><strong>断言和先决条件</strong></p>
+<pre><code>assert<span class="list">(<span class="keyword">_</span><span class="keyword">:_</span><span class="keyword">:file</span><span class="keyword">:line</span>:)</span>
+
+precondition<span class="list">(<span class="keyword">_</span><span class="keyword">:_</span><span class="keyword">:file</span><span class="keyword">:line</span>:)</span> 
+</code></pre><h4 id="枚举">枚举</h4><p><strong>值类型</strong></p>
+<pre><code><span class="class"><span class="keyword">enum</span> <span class="title">SomeEnumeration</span> {</span>
+/<span class="regexp">/ 枚举定义放在这里
+}
+
+/</span><span class="regexp">/MARK   :CaseIterable
+    SomeEnumeration.allCases.count</span>
+</code></pre><p><strong>关联值</strong></p>
+<pre><code><span class="comment">//元组</span>
+<span class="keyword">enum</span> Point {
+    case location(<span class="typename">Int</span>,<span class="typename">Int</span>)      <span class="comment">//x,y</span>
+    case space(<span class="typename">Int</span>,<span class="typename">Int</span>,<span class="typename">Int</span>)     <span class="comment">//x,y,z</span>
+}
+
+ <span class="variable"><span class="keyword">var</span> currentPoint</span> = Point.location(<span class="number">10</span>, <span class="number">20</span>)
+      currentPoint = .space(<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>)  <span class="comment">//覆盖location</span>
+</code></pre><p><strong>原始值</strong><br>原始值类型相同，且内容不重复</p>
+<p><strong>Int</strong> 类型隐式赋值同 OC NS_Enum(){},  <strong>String</strong> 隐式为 字符串名称 </p>
+<pre><code>使用枚举成员的 rawValue 属性可以访问该枚举成员的原始值：
+-&gt;   Direct<span class="class">.north</span><span class="class">.rawValue</span>
+<span class="tag">var</span>  initD = <span class="function"><span class="title">Direct</span><span class="params">(rawValue: &lt;#T##Int#&gt;)</span></span>
+</code></pre><h4 id="结构体">结构体</h4><p><strong>值类型</strong><br>    struct Person {<br>        var age   = 20<br>        var name  = “jack”<br>    }</p>
+<h4 id="类">类</h4><p><strong>引用类型(同 指针)</strong></p>
+<p>恒等运算符  <strong>===</strong> 和 <strong>!==</strong>  判断两个变量或者常量是否引用了同一个类的实例。</p>
+<h4 id="区别">区别</h4><table>
+<thead>
+<tr>
+<th style="text-align:left">struct</th>
+<th style="text-align:center">class</th>
+<th style="text-align:right">备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">值类型</td>
+<td style="text-align:center">引用类型</td>
+<td style="text-align:right"></td>
+</tr>
+<tr>
+<td style="text-align:left">深拷贝 copy 副本</td>
+<td style="text-align:center">指针传递</td>
+<td style="text-align:right">class存储在堆中</td>
+</tr>
+<tr>
+<td style="text-align:left">copy on write</td>
+<td style="text-align:center">引用计数</td>
+<td style="text-align:right"></td>
+</tr>
+<tr>
+<td style="text-align:left">函数编程</td>
+<td style="text-align:center">面向对象</td>
+<td style="text-align:right"></td>
+</tr>
+<tr>
+<td style="text-align:left">不能继承</td>
+<td style="text-align:center">single 单继承</td>
+<td style="text-align:right"></td>
+</tr>
+<tr>
+<td style="text-align:left">初始化 不需要实现 init ：var</td>
+<td style="text-align:center">需要自己实现带参数的初始化接口</td>
+<td style="text-align:right"></td>
+</tr>
+<tr>
+<td style="text-align:left">mutable 需要明确说明</td>
+<td style="text-align:center">一直是  mutable</td>
+<td style="text-align:right"></td>
+</tr>
+<tr>
+<td style="text-align:left">多数都是struct（除去 协议、view ）</td>
+<td style="text-align:center">viewModel  在MVVM中是  class-based （需要被共享-&gt;指针类型）</td>
+<td style="text-align:right"></td>
+</tr>
+</tbody>
+</table>
+<h4 id="generics_泛型">generics   泛型</h4><pre><code><span class="comment">//Element 泛型 T</span>
+<span class="class"><span class="keyword">struct</span> <span class="title">Array</span>&lt;<span class="title">Element</span>&gt; </span>{
+
+    <span class="func"><span class="keyword">func</span> <span class="title">append</span><span class="params">(<span class="number">_</span> element: Element )</span></span> {
+
+    }
+}
+</code></pre><h4 id="functions">functions</h4><pre><code>也是一种类型、   （<span class="keyword">Int</span>，<span class="keyword">Int</span>）-&gt; <span class="keyword">Bool</span> 
+</code></pre><h4 id="Closures">Closures</h4><pre><code><span class="attribute">闭包    =</span>=<span class="string">  内联函数</span>
+</code></pre><h4 id="参考">参考</h4><p><a href="https://swiftgg.gitbook.io/swift/swift-jiao-cheng/01_the_basics" target="_blank" rel="external">Swiftgg-gitbook</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://osbornZ.github.com/2020/06/21/SwiftUI-初识/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -997,205 +1269,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://osbornZ.github.com/2020/03/03/敏捷革命/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="osborn">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="诗与远方">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/03/03/敏捷革命/" itemprop="url"><<敏捷革命>></a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-03T11:35:09+08:00">
-                2020-03-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/项目管理/" itemprop="url" rel="index">
-                    <span itemprop="name">项目管理</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2020/03/03/敏捷革命/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2020/03/03/敏捷革命/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>《Scrum:the art of doing twice the work in half the time》<br><strong>杰夫·萨瑟兰</strong>   Scrum发明者与共同创造人，被誉为“Scrum之父”，《敏捷宣言》起草人之一。 </p>
-<p>主要从几个问题的思考中，总结敏捷革命的相关感悟。</p>
-<h4 id="什么是scrum_？">什么是scrum ？</h4><p>  Scrum 是用于开发、交付和持续支持复杂产品的一个框架，是一个增量的、迭代的开发过程。<br>  原指橄榄球运动的术语，愿意为团队通力合作，在场地内传球。<br>  <a href="http://www.scrumcn.com/agile/scrum-knowledge-library/%E4%BB%80%E4%B9%88%E6%98%AFscrum.html" target="_blank" rel="external">scrum的定义</a></p>
-<h4 id="为什么要敏捷_？">为什么要敏捷 ？</h4><p><strong>外因:</strong> </p>
-<p> 这个社会的节奏越来越快，我们要学会如何快速取得胜利。天下武功唯快不破，快速容错，才能迅速改正。  <strong>要么改变，要么倒闭。</strong></p>
-<p><strong>内因:</strong></p>
-<p>当前软件开发领域的情况实际很糟糕，绝大多数的项目会预期超支，最后的交付成果还不能用。</p>
-<p>张小龙在微信领导力大会上谈到：“关于敏捷管理，我特别希望大家能够多去做一些尝试，我们今天可以想一些与众不同的点子。我们很快把它上线了，然后可以去验证，如果不对就下线，如果还有改进余地，下个星期再去改它。这是一个能够持续实现你的想法的过程。”</p>
-<h4 id="如何通过敏捷提高创造力，提高效率_？">如何通过敏捷提高创造力，提高效率 ？</h4><p>  即指目前的协作方式发生了变化，传统方式没有那么快速的响应。</p>
-<p>  <strong>scrum的由来</strong></p>
-  <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">检查调整循环，PDCA。(Plan,<span class="operator"><span class="keyword">Do</span>,<span class="keyword">Check</span>,<span class="keyword">Action</span>)</span></span><br></pre></td></tr></table></figure>
-<p>  <strong>聚焦团队而非个人</strong> </p>
-  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">团队最好小而精 <span class="number">3</span>-<span class="number">7</span>人最佳，超过<span class="number">9</span>个人建议拆分。</span><br><span class="line">沟通成本，书中介绍一个沟通渠道影响的算式，  渠道数量 = n*（n-<span class="number">1</span>）/<span class="number">2</span>;(n指团队人数)</span><br><span class="line"></span><br><span class="line">避免<span class="string">"基本归因错误"</span>，团队成员相互信任，一起解决障碍，自主决策；</span><br></pre></td></tr></table></figure>
-<p>  <strong>珍惜时间</strong></p>
- <figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">时间有限，及时行乐。哦，不对。。。努力奋斗 ！！！</span><br><span class="line">固定的时间周期和节奏能够保证团队的战斗力，也能够鼓舞士气，当然前提是产出冲刺成果，增强团队成就感。scrum 流程的核心是 <span class="strong">__节奏__</span></span><br><span class="line">浪费是一种犯罪，浪费时间就是浪费生命。</span><br><span class="line"></span><br><span class="line">大野耐一谈到浪费的三种类型：</span><br><span class="line"></span><br><span class="line"><span class="bullet">1. </span>无理 （超负荷）</span><br><span class="line"><span class="bullet">2. </span>无稳 （生产运作不平稳，峰值过高过低）</span><br><span class="line"><span class="bullet">3. </span>无驮 （指一切不创造价值但却消耗资源的活动）</span><br><span class="line">/ 还有一种 情绪浪费.</span><br><span class="line"></span><br><span class="line"> 一次只做一件事，因为人的精力是有限的。而且应该一次性把事情做好，避免返工的问题，这样耗时会是及时处理的4倍之多（长时间不修改的代码，回过头都不知道逻辑是怎样）；</span><br><span class="line"> 工时越长，效率反而会更低。工时只代表一种成本，应该关注完成任务的速度和质量而不是一个人用多久才能完成一项任务，关注产出， 所谓的 <span class="strong">__996__</span> 也不需要做过多争论。</span><br></pre></td></tr></table></figure>
-<p> <strong>务实规划，拒绝空想</strong></p>
-  <figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">忌讳：目标荒谬； 期待过高；负担过重 。</span><br><span class="line"><span class="string">"用户故事"</span> 的重要性，学会时间点评估方式，拒绝口头承诺和临时性的迭代deadline。</span><br></pre></td></tr></table></figure>
-<p> <strong>将快乐转化为更高绩效</strong></p>
-<pre><code>   最好的工作是自己的兴趣，只有真正在工作中建立兴趣和快乐的人，才能相对有更大的创造性。
-人虽然是制度的产物，但是根据马斯洛人类需求层次模型，每个人的自主感和掌控感和目标感会让人更快乐。所以我们需要赋能。
-</code></pre><p> <strong>找到最有价值的20%</strong>  </p>
-  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">一个App <span class="number">80</span>%的价值来源于<span class="number">20</span>% 的功能。 </span><br><span class="line">决策回路：OODA循环。Observe -Orient-Decide-Act。（观察-导向-决定-行动）</span><br><span class="line">优先级： 四象限法则；</span><br></pre></td></tr></table></figure>
-<p>  最后提到未来我们如何工作，阐述了 scrum 在教育、扶贫、政府的实践和愿景。<br>  这是一套新的协作模式，我们可以应用到各行各业，生活中的方方面面。为了美好的生活而努力奋斗。 </p>
-<p><strong>Scrum 方法</strong></p>
-<ul>
-<li>无论你什么时候启动一个项目，为什么不经常检验一下自己正在做的事情，看看是否朝着正确的方向前进？<ul>
-<li>结果是不是大家真正希望看到的？</li>
-<li>是否有什么办法能改善目前正在做的事情？</li>
-<li>如何才能做得更快更好？</li>
-<li>存在哪些潜在的障碍？</li>
-</ul>
-</li>
-</ul>
-<h3 id="自我迭代">自我迭代</h3><p><strong>曾子曰：“吾日三省吾身：为人谋而不忠乎？与朋友交而不信乎？传不习乎？”</strong> </p>
-<p>最近一直在思考总结个人成长中自我管理，俗称自律；正好最近听了<br><strong>池大的”做好交付的四大心法”</strong>   </p>
-<ul>
-<li>强化内功</li>
-<li>持续改进</li>
-<li>不断叠加</li>
-<li>保持耐心</li>
-</ul>
-<p>印证到敏捷scrum中，个人迭代亦如是。<br>对于每一个工作生活中的事情，首先我们需要保持一个成长型思维，不管是否困难有多大（学习一门新语言， 半年减肥20斤,一年戒烟…） 只要 持续+叠加+复盘 自我迭代，一定会有一个正向的目标收益。</p>
-<ol>
-<li>持续即是拆分事情的阶段划分，第一周做什么，下一周…</li>
-<li>复盘即是对一个迭代的总结,纠正目标偏向和及时解决突发性问题…</li>
-</ol>
-<p><strong>努力，奋斗！！！</strong></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1250,7 +1323,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1272,7 +1345,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
