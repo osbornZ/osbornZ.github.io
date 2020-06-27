@@ -253,6 +253,191 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://osbornZ.github.com/2020/06/27/Swift-OC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="osborn">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="诗与远方">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/06/27/Swift-OC/" itemprop="url">Swift & OC</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-27T17:52:19+08:00">
+                2020-06-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Swift/" itemprop="url" rel="index">
+                    <span itemprop="name">Swift</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2020/06/27/Swift-OC/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2020/06/27/Swift-OC/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="混编配置">混编配置</h3><p>Swift访问OC: 只需要在桥接文件 <strong>ProductName-Bridging-Header.h</strong> 中导入需要暴露给Swift的OC类，即可在Swift中访问相应OC类及方法。</p>
+<pre><code>创建<span class="keyword">swift </span>文件时候，xcode 会提示创建 桥接文件。 xxx-<span class="keyword">Bridging-Header.h</span>
+</code></pre><p>OC访问Swift: 在OC类中导入 <strong>ProductName-Swift.h</strong> 文件（Target名称不同，对应文件名称也不同，工程配置中能看到），即可访问Swift中暴露给OC的属性和方法。</p>
+<pre><code>build 会系统生成供oc调用的 .h，包含类及 <span class="keyword">public</span> 接口属性。
+</code></pre><p><a href="https://github.com/osbornZ/Swift" target="_blank" rel="external">OC-Swift Demo</a></p>
+<h3 id="Carthage">Carthage</h3><pre><code><span class="keyword">brew </span>update
+<span class="keyword">brew </span>install carthage
+</code></pre><h4 id="安装">安装</h4><pre><code>还是以<span class="keyword">Mac</span>库管理 homebrew
+brew upgrade carthage
+
+终端 <span class="keyword">cd</span>  到项目下创建文件:   touch Cartfile
+
+    github <span class="string">"Alamofire/Alamofire"</span> ~&gt; 5.0
+    github "SwiftyJSON/SwiftyJSON”
+</code></pre><p><strong>升级-第三方库</strong></p>
+<pre><code>carthage <span class="operator"><span class="keyword">update</span> <span class="comment">--platform iOS</span></span>
+</code></pre><p>完成后在项目文件夹下会生成 <strong>Carthage</strong>文件夹。</p>
+<p><strong>Xcode 配置</strong></p>
+<ul>
+<li>General中 导入build的库， /Carthage/build/iOS/xxx.framework</li>
+<li><p>build Phases<br>  新增一个 “+”  new run script phase</p>
+<pre><code>Shell 下方文本区域输入:  <span class="regexp">/usr/</span>local<span class="regexp">/bin/</span>carthage <span class="keyword">copy</span>-frameworks
+Input Files:
+$(SRCROOT)<span class="regexp">/Carthage/</span>Build<span class="regexp">/iOS/</span>Alamofire.framework
+</code></pre></li>
+</ul>
+<p><strong>Sourcetree</strong> git 如何忽略 carthage build文件 </p>
+<pre><code># Add <span class="keyword">this</span> line <span class="keyword">if</span> you want to avoid checking in <span class="keyword">source</span> code <span class="keyword">from</span> Carthage <span class="keyword">dependencies</span>.
+
+OCSwift<span class="regexp">/Carthage/</span>Checkouts
+OCSwift<span class="regexp">/Carthage/</span>Build
+</code></pre><hr>
+<p>还是觉得 cocoapods 省事,因为Carthage 下载完之后还是要配置.<br>cocoapods 集成度更高，也更省心。而有些人喜欢手动配置这些第三方库，这样 workspace 会更干净，那么使用 Carthage 就会很方便。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://osbornZ.github.com/2020/06/26/Swift-基础/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1105,170 +1290,6 @@ precondition<span class="list">(<span class="keyword">_</span><span class="keywo
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://osbornZ.github.com/2020/03/09/2019-书单/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="osborn">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="诗与远方">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/03/09/2019-书单/" itemprop="url">2019 书单</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-09T10:17:26+08:00">
-                2020-03-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/读书/" itemprop="url" rel="index">
-                    <span itemprop="name">读书</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2020/03/09/2019-书单/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2020/03/09/2019-书单/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><strong>2019 完成书单</strong></p>
-<ul>
-<li>《敏捷革命》</li>
-<li>《驱动力》</li>
-<li><p>《冲刺设计》</p>
-</li>
-<li><p>《OKR 实践指南》</p>
-</li>
-<li><p>《非暴力沟通》</p>
-</li>
-<li>《月亮与六便士》</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1323,7 +1344,7 @@ precondition<span class="list">(<span class="keyword">_</span><span class="keywo
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1345,7 +1366,7 @@ precondition<span class="list">(<span class="keyword">_</span><span class="keywo
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
