@@ -253,6 +253,221 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://osbornZ.github.com/2019/12/24/Image-Editing-with-Depth/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="osborn">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="诗与远方">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/12/24/Image-Editing-with-Depth/" itemprop="url">Image Editing with Depth</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-24T23:48:52+08:00">
+                2019-12-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/12/24/Image-Editing-with-Depth/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2019/12/24/Image-Editing-with-Depth/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="Loading_Depth_Data"><strong>Loading Depth Data</strong></h3><p>首先要获取深度数据到内存</p>
+<pre><code><span class="keyword">*</span> PHContentEditingInput
+<span class="keyword">*</span> PHImageManager
+
+[asset requestContentEditingInputWithOptions:options completionHandler:^(PHContentEditingInput <span class="keyword">*</span>contentEditingInput, NSDictionary <span class="keyword">*</span>info) {
+        // Create a CIImage from the full image representation.
+        NSURL <span class="keyword">*</span>url = [contentEditingInput fullSizeImageURL];
+</code></pre><h3 id="Testing_for_Depth_Data_with_ImageIO"><strong>Testing for Depth Data with ImageIO</strong></h3><p>查看是否存在深度数据</p>
+<pre><code>//<span class="type">Test</span>
+<span class="type">CFURLRef</span> <span class="keyword">ref</span> = (__bridge <span class="type">CFURLRef</span>)url;
+<span class="type">CGImageSourceRef</span> source = <span class="type">CGImageSourceCreateWithURL</span>(<span class="keyword">ref</span>, <span class="keyword">nil</span>);
+<span class="type">CFDictionaryRef</span> dictRef = <span class="type">CGImageSourceCopyProperties</span>(source, <span class="keyword">nil</span>);
+<span class="type">NSLog</span>(@<span class="string">"========= %@"</span>,dictRef);
+</code></pre><h3 id="Reading_Depth_Data"><strong>Reading Depth Data</strong></h3><pre><code>auxiliary
+
+AVDepthData 
+@<span class="keyword">property</span>   CVPixelBufferRef depthDataMap
+
+<span class="keyword">use</span> Metal <span class="keyword">or</span> Core Image <span class="keyword">to</span> <span class="keyword">process</span> <span class="keyword">then</span> get DepthImage.
+</code></pre><p>注意事项 需要做几件事： </p>
+<ul>
+<li>深度信息分辨率低   scaling up<br>  CIEdgePreserveUpsampleFilter  上采样图像信息达到保留边缘的效果<br>  （所有的使用视差而不是深度信息，官方建议是视差效果会更好一点）</li>
+<li>深度值并不是局限在 [0,1]的具体值，视差可能0就是无穷远</li>
+</ul>
+<h3 id="Filtering_with_Depth_Data"><strong>Filtering with Depth Data</strong></h3><ul>
+<li>sample background effects  （混合遮罩）<br> 稀释效果/背景白化/马赛克（CI 六边形，运动模糊）<br> using Disparity as a mask.</li>
+<li>Custom Depth Effect </li>
+<li>Depth Blur Effect  （景深）</li>
+<li>3D Effect</li>
+</ul>
+<hr>
+<pre><code><span class="built_in">CIAreaMinMaxRed</span>
+<span class="built_in">CIColorMatrix</span>, 线性过滤器 slope and bias 斜率和偏移
+<span class="built_in">CIColorClamp</span>
+<span class="built_in">CIBlendWithMask</span>
+</code></pre><p>//自定义效果</p>
+<pre><code><span class="title">CIColor</span> Kernel
+任何自定义的效果。例如：系统相机人像模式下
+</code></pre><p>//景深效果</p>
+<pre><code>CIDepthBlurEffect 
+<span class="operator"><span class="keyword">load</span> MainImage <span class="keyword">and</span> DisparityImage <span class="keyword">final</span> <span class="keyword">use</span> this filter <span class="keyword">with</span> <span class="keyword">name</span>
+<span class="number">1.</span> setValue  focus <span class="keyword">and</span> rectangle
+<span class="number">2.</span> <span class="keyword">use</span> vision framework <span class="keyword">to</span> special effect （such face detail），<span class="keyword">Max</span> <span class="keyword">is</span> <span class="number">4</span> faces，提高速率可以 <span class="keyword">set</span>  InputScaleFactor = <span class="number">0.5</span>   </span>
+</code></pre><p>// 3D 效果</p>
+<pre><code>实现 true 3D，我们需要使用 Metal.
+
+<span class="bullet">* </span>Mesh
+<span class="bullet">* </span>Vertex shader
+<span class="bullet">* </span>fragment shader 
+<span class="bullet">* </span>CIImageProcessorKernel
+</code></pre><h3 id="Saving_Depth_Data">Saving Depth Data</h3><ul>
+<li>方向 Orientation</li>
+<li>裁剪 Crop</li>
+<li>旋转 Transform</li>
+</ul>
+<p>CoreImage  提供了更方便的接口保存实现。</p>
+<p>DepthData 可使用的场景：</p>
+<ol>
+<li>Edit</li>
+<li>capture</li>
+<li>share</li>
+</ol>
+<p>参考 <a href="https://developer.apple.com/videos/play/wwdc2017/508" target="_blank" rel="external">WWDC2017</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://osbornZ.github.com/2018/03/08/Hello World PHP/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -822,7 +1037,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -905,7 +1120,7 @@
     <footer id="footer" class="footer">
       <div class="footer-inner">
         <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
